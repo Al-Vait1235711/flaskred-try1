@@ -21,12 +21,23 @@ jobs:
     environment:
      name: github-pages
      url: ${{ steps.deployment.outputs.page_url }}
-     
+
     runs-on: ubuntu-latest
     steps:
       # Checkout repository code
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      # Check if docker exists
+      - name: Check if docker exists
+        run: |
+           docker version
+           echo "Docker version above"
+           echo ""
+           echo "_______________________________"
+           echo ""
+           docker compose --version
+           echo "Docker Composeversion above"
 
       #Download and setup Docker   
       - name: Install Docker on ubuntu
