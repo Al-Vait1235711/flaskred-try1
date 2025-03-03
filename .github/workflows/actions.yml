@@ -51,11 +51,11 @@ jobs:
         run: |
          docker compose up -d
 
-      # # Deploy to GH-Pages
-      # - name: Deploy on github pages
-      #   uses: actions/configure-pages@v4
+      # Deploy to GH-Pages
+      - name: Deploy on github pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
       # - name: Upload artifact
       #   uses: actions/upload-pages-artifact@v3
-      #   with:
-      #     branch: gh-pages
-      #     folder: build
+        with:
+          branch: gh-pages
+          folder: build
