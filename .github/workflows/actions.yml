@@ -37,7 +37,7 @@ jobs:
       # Install Docker Compose
       - name: Check Docker Compose Version
         run: |
-         docker-compose --version
+         docker compose --version
         continue-on-error: false
 
         # Build Docker Images
