@@ -31,25 +31,13 @@ jobs:
       # Check if docker exists
       - name: Check if docker exists
         run: |
-           docker version
            echo "Docker version above"
+           docker version
            echo ""
            echo "_______________________________"
            echo ""
-           docker compose --version
            echo "Docker Composeversion above"
-
-      #Download and setup Docker   
-      - name: Install Docker on ubuntu
-        run: |
-         curl -fsSL https://get.docker.com -o get-docker.sh
-         sudo sh get-docker.sh
-        continue-on-error: false
-
-      # Install Docker Compose
-      - name: Check Docker Compose Version
-        run: |
-         docker compose --version
+           docker compose --version
         continue-on-error: false
 
         # Build Docker Images
