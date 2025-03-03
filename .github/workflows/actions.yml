@@ -1,0 +1,40 @@
+name: Flask-Redis-Test
+on:
+  push:
+    branches: [main]
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+
+
+jobs:
+  deploy:
+    environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repository code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      # Build Docker Images
+      - name: Prepare Build Docker Images
+        run: |
+         mkdir -p build
+         docker compose -f compose.yaml build
+
+      # Deploy to VPS
+      - name: Deploy on github pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: build
