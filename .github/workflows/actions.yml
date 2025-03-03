@@ -18,15 +18,29 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
+#    environment:
 #       name: github-pages
-#       url: ${{ steps.deployment.outputs.page_url }}
+#       url: ..........
     runs-on: ubuntu-latest
     steps:
       # Checkout repository code
       - name: Checkout Repository
         uses: actions/checkout@v4
-      # Build Docker Images
+
+      #Download and setup Docker   
+      - name: Install Docker on ubuntu
+        run: |
+         curl -fsSL https://get.docker.com -o get-docker.sh
+         sudo sh get-docker.sh
+        continue-on-error: false
+
+      # Install Docker Compose
+      - name: Check Docker Compose Version
+        run: |
+         docker-compose --version
+        continue-on-error: false
+
+        # Build Docker Images
       - name: Prepare Build Docker Images
         run: |
          mkdir -p build
@@ -34,7 +48,9 @@ jobs:
 
       # Deploy to VPS
       - name: Deploy on github pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           branch: gh-pages
           folder: build
