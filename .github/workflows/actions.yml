@@ -31,13 +31,13 @@ jobs:
       # Check if docker exists
       - name: Check if docker exists
         run: |
-           echo "Docker version above"
+           echo "Docker version"
            docker version
            echo ""
            echo "_______________________________"
            echo ""
-           echo "Docker Composeversion above"
-           docker compose --version
+           echo "Docker Compose Version "
+           docker compose version
         continue-on-error: false
 
         # Build Docker Images
