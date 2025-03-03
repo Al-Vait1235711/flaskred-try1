@@ -46,11 +46,16 @@ jobs:
          mkdir -p build
          docker compose -f compose.yaml build
 
-      # Deploy to VPS
-      - name: Deploy on github pages
-        uses: actions/configure-pages@v4
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          branch: gh-pages
-          folder: build
+      # Run Docker images 
+      - name: Run Docker Compose
+        run: |
+         docker compose up -d
+
+      # # Deploy to GH-Pages
+      # - name: Deploy on github pages
+      #   uses: actions/configure-pages@v4
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     branch: gh-pages
+      #     folder: build
